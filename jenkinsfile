@@ -1,0 +1,21 @@
+Pipeline {
+	agent none
+	name = $name 
+	def password = $password
+	def branch = feature1
+	stages {
+		stage (‘clone’) {
+			agent linuxgit
+			steps {
+				parm: branch 
+				git clone <repo_url>
+			}
+		}
+		stage (‘build’) {
+			agent linuxgit
+			steps {
+				mvn clean install
+			}
+		} 
+	}
+}
